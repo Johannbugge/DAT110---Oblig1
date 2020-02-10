@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import java.net.Socket;
 
-import no.hvl.dat110.TODO;
 
 public class MessagingClient {
 
@@ -17,18 +16,23 @@ public class MessagingClient {
 	}
 
 	// connect to messaging server
+	@SuppressWarnings("resource")
 	public Connection connect() {
 
-		Socket clientSocket;
+		Socket clientSocket = new Socket();
 		Connection connection = null;
 
-		// TODO
+		// TODO: COMPLETE
 		// create TCP socket for client and connection
 		// create connection object
 		
-		if (true) {
-			throw new UnsupportedOperationException(TODO.method());
+		try {
+			clientSocket = new Socket(server, port);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+		
+		connection = new Connection(clientSocket); 
 
 		return connection;
 	}

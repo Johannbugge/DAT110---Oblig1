@@ -1,11 +1,12 @@
 package no.hvl.dat110.messaging;
 
 import java.io.DataInputStream;
+
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import static no.hvl.dat110.messaging.MessageConfig.SEGMENTSIZE;
 
-import no.hvl.dat110.TODO;
 
 public class Connection {
 
@@ -27,29 +28,38 @@ public class Connection {
 
 			System.out.println("Connection: " + ex.getMessage());
 			ex.printStackTrace();
+
 		}
 	}
 
 	public void send(Message message) {
 
-		// TODO
+		// TODO: COMPLETE
 		// encapsulate the data contained in the message and write to the output stream
 		// Hint: use the encapsulate method on the message
-		throw new UnsupportedOperationException(TODO.method());
+
+		try {
+			outStream.write(message.encapsulate());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 	}
 
 	public Message receive() {
 
-		Message message;
-		byte[] recvbuf;
+		Message message = new Message();
+		byte[] recvbuf = new byte[SEGMENTSIZE];
 
-		// TODO
+		// TODO: COMPLETE
 		// read a segment (128 bytes) from the input stream and decapsulate into message
 		// Hint: create a new Message object and use the decapsulate method
-		
-		if (true) {
-			throw new RuntimeException("not yet implemented");
+
+		try {
+			inStream.read();
+			message.decapsulate(recvbuf);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 
 		return message;
